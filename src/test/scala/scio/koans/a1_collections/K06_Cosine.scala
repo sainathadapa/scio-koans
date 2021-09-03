@@ -22,7 +22,23 @@ class K06_Cosine extends JmhKoan {
     dotProd / (mag1 * mag2)
   }
 
-  @Benchmark def v1: Double = ???
+  @Benchmark def v1: Double = {
+    var dp = 0.0
+    var m1 = 0.0
+    var m2 = 0.0
+    var a = 0.0
+    var b = 0.0
+    var i = 0
+    while (i < vec1.length) {
+      a = vec1(i)
+      b = vec2(i)
+      dp += a * b
+      m1 += a * a
+      m2 += b * b
+      i += 1
+    }
+    dp / (math.sqrt(m1) * math.sqrt(m2))
+  }
 
   verifyResults()
   verifySpeedup(Speedup.Times(100))
